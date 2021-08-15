@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block near_starts %}
+
+    <h3 class="underline">Ближайшие старты:</h3>
+    {% for near_tour in near_tours %}
+        <a href="{% url 'tour_detail'  near_tour.tour_type near_tour.id %}">
+            <img width="30%" src="{{ near_tour.image.url }}">
+            <p>{{ near_tour.start_date|date:"d.m.Y" }} {{ near_tour.title }}</p>
+        </a>
+    {% endfor %}
+
+
+{% endblock near_starts %}
+{% block content %}
+    {% for tour in tours %}
+        <h1>{{ tour.title }}</h1>
+        <div style="display:flex; padding-bottom: 30px">
+            <a href="{% url 'tour_detail' tour.tour_type tour.id %}">
+
+                    <img width="300px" hight="300px " src="{{ tour.image.url }}"style="padding-right: 20px" >
+            </a>
+        {{ tour.description }}
+        </div>
+    {% endfor %}
+{% endblock %}

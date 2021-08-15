@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    {% for order in orders %}
+        <div style="padding-bottom: 20px">
+            <p> <span class="bold">Пользователь: </span> {{ order.user.username }}</p>
+        <p> <span class="bold">Тур: </span>{{ order.tour.title }}</p>
+        <p> <span class="bold">Даты: </span>{{ order.tour.start_date|date:"d.m.Y" }} - {{ order.tour.end_date|date:"d.m.Y" }}</p>
+        <p> <span class="bold">Количество человек: </span>{{ order.person_numbers }}</p>
+        <p> <span class="bold">Номер телефона: </span>{{ order.contact_phone }}</p>
+
+        </div><hr>
+    {% endfor %}
+{% endblock %}

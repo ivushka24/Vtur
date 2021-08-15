@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Регистрация нового пользователя</h1>
+    <p>Пожалуйста, заполните форму:</p>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ user_form }}
+        </table>
+        <p><input type="submit" value="Создать учетную запись"></p>
+    </form>
+{% endblock %}

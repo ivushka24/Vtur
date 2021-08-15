@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="tour">
+        <h6> Вы успешно забронировали тур</h6>
+        <h1>{{ tour.title }}</h1>
+        <br>
+        <br>
+        <br>
+        <a href="{% url 'home' %}">
+            <p>Вернуться на главную страницу</p>
+        </a>
+    </div>
+
+{% endblock %}

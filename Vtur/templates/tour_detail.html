@@ -1,0 +1,45 @@
+{% extends 'base.html' %}6
+
+{% block content %}
+    <div style="padding-bottom: 20px ">
+        <h1>{{ tour.title }}</h1>
+    <br>
+        <h4 class="underline">Программа тура</h4>
+        <p>{{ tour.program|linebreaksbr }}
+        <hr>
+            {% for t in tours %}
+                {% if t.vacant_spot > 0 %}
+                    <p><span class="bold">Даты:   </span>{{ t.start_date|date:"d.m.Y" }} - {{ t.end_date|date:"d.m.Y" }}</p>
+                    <p><span class="bold">Количество свободных мест: </span>{{ t.vacant_spot }} </p>
+                    <p><span class="bold">Стоимость:</span> {{ t.cost }} $</p>
+
+                    <div>
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.info }}"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+
+
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <table>
+                                {{ form }}
+                                <input value="{{ t.start_date|date:"Y-m-d" }}" name="start_date" hidden>
+                            </table>
+                            {% if user.is_authenticated %}
+                                <button type="submit" class="btn btn-outline-primary">Забронировать</button>
+                            {% else %}
+                                <a href="{% url 'login' %}?next={{ request.path }}">Войдите на сайт, чтобы забронировать
+                                    тур </a>
+                            {% endif %}
+                        </form>
+                    </div>
+                    <hr>
+                {% endif %}
+            {% endfor %}
+    </div>
+
+{% endblock %}
